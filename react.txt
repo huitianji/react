@@ -1,0 +1,68 @@
+【一：】es6->给我们带来了什么；
+let && const
+
+解决了提升问题。给js新增块级作用域
+
+箭头函数-- 不止是简化了function的定义，还解决了function 内this 关键字指向的问题
+
+babel --
+
+构建工具： webpack
+
+webpack 是一款强大的模块加载器兼打包工具，它能把各种资源。例如js (含jsp) .coffee，样式（含 less/sass）,图片点都作为模块来使用和处理
+
+
+why webpack
+
+--天生支持amd, commonjs,es6 module 等模块规范
+--预编译，支持 all in one ,也支持分包，还可以按需加载
+--打开了npm上广阔的package资源（也可以用browsify）
+
+-loaders
+-middlreware 中间件
+-use in server 服务端的使用
+-优化
+
+------------------
+
+核心类库： react
+-库，而不是框架
+-专注uI
+-组件化开发 && jsx语法
+-虚拟dom ，高效渲染
+-单向数据流
+-支持服务端渲染
+-生态完善： tools/redux/router/react native
+
+--
+使用ESlint 配合Airbnb 指南来保持我们团队的代码风格
+.eslintrc
+
+react-router
+
+redux  应用生命周期
+
+
+
+-------------------------------------
+
+pwd 文件的目录
+
+cat
+rm 删除文件或目录
+
+cp 文件的复制
+
+mv 移动文件
+
+grep 搜索
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "buid": "babel babel/src -d babel/buid"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huitianji/react.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huitianji/react/issues"
+  },
+  "homepage": "https://github.com/huitianji/react#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0"
+  }
+}
