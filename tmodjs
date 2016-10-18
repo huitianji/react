@@ -1,0 +1,102 @@
+npm install -g tmodjs
+
+Mac OSX 可能需要管理员权限运行： sudo npm install -g tmodjs
+
+[编写模板]
+TmodJS 的前端模板不再耦合在业务页面中，而是和后端模板一样有专门的目录管理。目录名称只支持英文、数字、下划线的组合，一个模板对应一个.html文件。
+
+支持基本的模板语法，如输出变量、条件判断、循环、包含子模板。模板语法参考
+
+完全支持 artTemplate 的语法
+
+
+[编译模板]
+
+只需要运行tmod这个命令即可，默认配置参数可以满足绝大多数项目。
+
+tmod [模板目录] [配置参数]
+// tmod template/ --output ./
+模板目录必须是模板的根目录，若无参数则为默认使用当前工作目录，tmodjs 会监控模板目录修改，每次模板修改都会增量编译。
+
+【配置参数】
+
+--debug 输出调试版本
+--charset value 定义模板编码，默认utf-8
+--output value 定义输出目录，默认./build
+--type value 定义输出模块格式，默认default，可选cmd、amd、commonjs
+--no-watch 关闭模板目录监控
+--version 显示版本号
+--help 显示帮助信息
+配置参数将会保存在模板目录配置文件中，下次运行无需输入配置参数（--no-watch 与 --debug 除外）。
+
+示例
+
+tmod ./tpl --output ./build
+
+【使用模板】
+
+使用默认的格式
+
+TmodJS 默认将整个目录的模板压缩打包到一个名为 template.js 的脚本中，可直接在页面中使用它：
+
+<script src="tpl/build/template.js"></script>
+<script>
+    var html = template('news/list', _list);
+    document.getElementById('list').innerHTML = html;
+</script>
+template.js 还支持 RequireJS、SeaJS、NodeJS 加载。示例
+
+
+指定格式（amd / cmd / commonjs)
+
+此时每个模板就是一个单独的模块，无需引用 template.js：
+
+var render = require('./tpl/build/news/list');
+var html = render(_list);
+注意：模板路径不能包含模板后缀
+
+【演示】
+
+TmodJS 源码包中test/tpl是一个演示项目的前端模板目录，基于默认配置。切换到源码目录后，编译：
+
+tmod test/tpl
+编译完毕后你可以在浏览器中打开 test/index.html 查看如何使用编译后的模板。
+
+
+【配置】
+
+TmodJS 的项目配置文件保存在模板目录的 package.json 文件中：
+
+{
+    "name": "template",
+    "version": "1.0.0",
+    "dependencies": {
+        "tmodjs": "1.0.0"
+    },
+    "tmodjs-config": {
+        "output": "./build",
+        "charset": "utf-8",
+        "syntax": "simple",
+        "helpers": null,
+        "escape": true,
+        "compress": true,
+        "type": "default",
+        "runtime": "template.js",
+        "combo": true,
+        "minify": true,
+        "cache": false
+    }
+}
+字段	类型	默认值	说明
+output	String	"./build"	编译输出目录设置
+charset	String	"utf-8"	模板使用的编码（暂时只支持 utf-8）
+syntax	String	"simple"	定义模板采用哪种语法。可选：simple、native
+helpers	String	null	自定义辅助方法路径
+escape	Boolean	true	是否过滤 XSS。如果后台给出的数据已经进行了 XSS 过滤，就可以关闭模板的过滤以提升模板渲染效率
+compress	Boolean	true	是否压缩 HTML 多余空白字符
+type	String	"default"	输出的模块类型，可选：default、cmd、amd、commonjs
+runtime	String	"template.js"	设置输出的运行时名称
+alias	String	null	设置模块依赖的运行时路径（仅针对于非default的类型模块配置字段。如果不指定模块内部会自动使用相对 runtime 的路径）
+combo	Boolean	true	是否合并模板（仅针对于 default 类型的模块）
+minify	Boolean	true	是否输出为压缩的格式
+cache	Boolean	true	是否开启编译缓存
