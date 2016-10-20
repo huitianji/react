@@ -1,3 +1,6 @@
+npm install gulp-load-plugins --save-dev
+
+
 【一：】es6->给我们带来了什么；
 let && const
 
