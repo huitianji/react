@@ -634,7 +634,7 @@ $(function() {
         return this.optional(element) || (tel.test(value));
     }, "请正确填写邮政编码");
 
-    //--2
+    //--2--不输入身份证禁止发送验证码
 
     var sydCodeFlag = false;
     console.log(sydCodeFlag);
